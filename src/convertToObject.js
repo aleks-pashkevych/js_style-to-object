@@ -6,23 +6,16 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const cssParams = sourceString.split(';');
-  const cssValues = {};
+  const cssParams = sourceString
+    .split(';')
+    .map((val) => val.trim())
+    .filter((str) => str !== '');
 
-  for (let i = 0; i < cssParams.length; i++) {
-    if (cssParams[i].trim().length === 0) {
-      break;
-    }
+  const cssValues = cssParams.map((item) => {
+    item.split(':').map((el) => el.trim());
+  });
 
-    const arr = cssParams[i].split(':');
-    const key = arr[0].trim();
-    const value = arr[1].trim();
-
-    cssValues[key] = value;
-  }
-
-  // console.log(cssValues);
-  return cssValues;
+  return Object.fromEntries(cssValues);
 }
 
 module.exports = convertToObject;
