@@ -6,12 +6,18 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
+  if (!sourceString) {
+    return {};
+  }
+
   const strVal = sourceString.split(';');
   const cssElements = strVal.reduce((cssParams, current) => {
     const [key, value] = current.split(':');
 
-    if (key.trim() && value.trim()) {
-      cssParams[key.trim()] = value.trim();
+    if (key && value) {
+      if (key.trim() !== undefined || value.trim() !== undefined) {
+        cssParams[key.trim()] = value.trim();
+      }
     }
 
     return cssParams;
