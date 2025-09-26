@@ -14,10 +14,8 @@ function convertToObject(sourceString) {
   const cssElements = strVal.reduce((cssParams, current) => {
     const [key, value] = current.split(':');
 
-    if (key && value) {
-      if (key.trim() !== undefined || value.trim() !== undefined) {
-        cssParams[key.trim()] = value.trim();
-      }
+    if (key && value && key.trim().length > 0 && value.trim().length > 0) {
+      cssParams[key.trim()] = value.trim();
     }
 
     return cssParams;
